@@ -1,0 +1,21 @@
+import numpy as np
+
+# Define the transition matrix
+transition_matrix = np.array([
+    [0.7, 0.3],  # Transition probabilities from state 0
+    [0.4, 0.6]   # Transition probabilities from state 1
+])
+
+# Define the initial state probabilities
+initial_probabilities = np.array([0.5, 0.5])  # Equal initial probabilities for each state
+
+# Simulate the Markov Chain
+num_steps = 10
+current_state = np.random.choice([0, 1], p=initial_probabilities)  # Choose initial state randomly
+chain = [current_state]
+
+for _ in range(num_steps):
+    current_state = np.random.choice([0, 1], p=transition_matrix[current_state])
+    chain.append(current_state)
+
+print("Generated Markov Chain:", chain)
