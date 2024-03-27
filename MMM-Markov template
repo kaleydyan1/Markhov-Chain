@@ -1,0 +1,27 @@
+import numpy as np
+from hmmlearn import hmm
+
+# Generate synthetic data from a Markov Chain
+def generate_data(num_samples):
+    # Define transition matrix
+    transition_matrix = np.array([[0.9, 0.1],
+                                  [0.2, 0.8]])
+    # Define initial state distribution
+    initial_state_probabilities = np.array([0.5, 0.5])
+    # Generate data
+    data = []
+    current_state = np.random.choice([0, 1], p=initial_state_probabilities)
+    for _ in range(num_samples):
+        data.append(current_state)
+        current_state = np.random.choice([0, 1], p=transition_matrix[current_state])
+    return np.array(data)
+
+# Fit a Markov Mixture Model to the data
+def fit_mmm(data):
+    model = hmm.GaussianHMM(n_components=2, covariance_type="full")
+    model.fit(data.reshape(-1, 1))
+    return model
+
+# Generate synthetic data
+num_samples = 1000
+da
